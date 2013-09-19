@@ -17,5 +17,6 @@ module.exports = {
 				result[i] = {tests: this.tests[i].run(test_result), title: this.tests[i].title };
 		}
 		return result;
-	}
+	},
+	test_result : test_result
 }

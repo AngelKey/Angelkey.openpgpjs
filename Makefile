@@ -10,8 +10,8 @@ help:
 	@echo "documentation  - generates documentation. Requires jsdoc (3.2) in PATH"
 	@echo "build          - build the rolled-up output"
 
-OUT=resources/openpgp.js
-BROWSER=resources/openpgp.browser.js
+OUT=index.js
+BROWSER=resources/openpgp.js
 BROWSERIFY=node_modules/.bin/browserify
 
 all: $(OUT) $(BROWSER)
@@ -43,7 +43,7 @@ minify:
 	@./scripts/minimize.sh
 
 test:
-	@echo to be implemented
+	node test/run.js
 
 documentation:
 	@jsdoc src -r -d doc
@@ -54,10 +54,10 @@ $(OUT):
 	echo "\tvar navigator = 'node';" >> $(OUT)
 	find src/ -type f -name '*.js' | xargs cat | awk '{ print "\t", $$0 }' >> $(OUT)
 	echo "\texports.OpenPGP = _openpgp;" >> $(OUT)
-	echo "\texports.global = openpgp;" >> $(OUT)
+	echo "\texports.openpgp = openpgp;" >> $(OUT)
 	echo "})(this);" >> $(OUT)
 
-build: $(OUT)
+build: $(OUT) $(BROWSER)
 
 $(BROWSER): $(OUT)
 	$(BROWSERIFY) $(OUT) -s openpgp > $(BROWSER)
@@ -66,4 +66,4 @@ clean:
 	\rm -rf $(OUT) $(BROWSER)
 
 
-.PHONY: clean 
+.PHONY: clean test

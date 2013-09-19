@@ -1,3 +1,5 @@
+(function(e){if("function"==typeof bootstrap)bootstrap("openpgp",e);else if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else if("undefined"!=typeof ses){if(!ses.ok())return;ses.makeOpenpgp=e}else"undefined"!=typeof window?window.openpgp=e():global.openpgp=e()})(function(){var define,ses,bootstrap,module,exports;
+return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (){ 
 	var navigator = 'node';
 	 // GPG4Browsers - An OpenPGP implementation in javascript
@@ -6152,15 +6154,37 @@
 	 			var buf = new Uint32Array(1);
 	 			window.crypto.getRandomValues(buf);
 	 			return buf[1];
+	 		},
+	 		html_encode : function (message) {
+	 			if (message == null)
+	 				return "";
+	 			return $('<div/>').text(message).html();
+	 		},
+	 		print_debug : function (str) {
+	 			str = compat.html_encode(str);
+	 			compat.showMessages("<tt><p style=\"background-color: #ffffff; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\">"+str.replace(/\n/g,"<br>")+"</p></tt>");
+	 		},
+	 		print_error : function (str) {
+	 			str = openpgp_encoding_html_encode(str);
+	 			showMessages("<p style=\"font-size: 80%; background-color: #FF8888; margin:0; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\"><span style=\"color: #888;\"><b>ERROR:</b></span>	"+str.replace(/\n/g,"<br>")+"</p>");
+	 		},
+	 		print_info : function (str) {
+	 			str = openpgp_encoding_html_encode(str);
+	 			showMessages("<p style=\"font-size: 80%; background-color: #88FF88; margin:0; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\"><span style=\"color: #888;\"><b>INFO:</b></span>	"+str.replace(/\n/g,"<br>")+"</p>");
+	 		},
+	 		print_warning : function (str) {
+	 			str = openpgp_encoding_html_encode(str);
+	 			showMessages("<p style=\"font-size: 80%; background-color: #FFAA88; margin:0; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\"><span style=\"color: #888;\"><b>WARNING:</b></span>	"+str.replace(/\n/g,"<br>")+"</p>");
 	 		}
 	 	};
 	 };
 	 
 	 if (typeof window === "undefined" || window === null) {
 	   	var crypto_mod = require('cry' + 'pto');
+	   	var _store = {};
 	 	compat = {
-	 		local_storage_get : function (k) { return null; },
-	 		local_storage_set : function (k,v) { return null; },
+	 		local_storage_get : function (k) { return _store[k] || null; },
+	 		local_storage_set : function (k,v) { return (_store[k] = v); },
 	 		get_random_byte : function () {
 	 			var buf = crypto_mod.rng(1);
 	 			return buf.readUInt8(0);
@@ -6168,7 +6192,12 @@
 	 		get_random_uint32 : function () {
 	 			var buf = crypto_mod.rng(1);
 	 			return buf.readUint8(0);
-	 		}
+	 		},
+	 		html_encode : function (msg) { return msg; },
+	 		print_debug : function (msg) { console.log("D " + msg); },
+	 		print_error : function (msg) { console.log("E " + msg); },
+	 		print_info : function (msg)  { console.log("I " + msg); },
+	 		print_warning : function (msg) { console.log("W " + msg); }
 	 	};
 	 };
 	 
@@ -7895,9 +7924,7 @@
 	  * @return {String} Html encoded string
 	  */
 	 function openpgp_encoding_html_encode(message) {
-	 	if (message == null)
-	 		return "";
-	 	return $('<div/>').text(message).html();
+	 	return compat.html_encode(message);
 	 }
 	 
 	 /**
@@ -13194,6 +13221,8 @@
 	 var Util = function() {
 	 
 	     this.emailRegEx = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+	 
+	     // ' <--- un-bork sytax highlighting!
 	 	
 	 	this.hexdump = function(str) {
 	 	    var r=[];
@@ -13365,8 +13394,7 @@
 	 	 */
 	 	this.print_debug = function(str) {
 	 		if (openpgp.config.debug) {
-	 			str = openpgp_encoding_html_encode(str);
-	 			showMessages("<tt><p style=\"background-color: #ffffff; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\">"+str.replace(/\n/g,"<br>")+"</p></tt>");
+	 			compat.print_debug(str);
 	 		}
 	 	};
 	 	
@@ -13385,8 +13413,7 @@
 	 	this.print_debug_hexstr_dump = function(str,strToHex) {
 	 		if (openpgp.config.debug) {
 	 			str = str + this.hexstrdump(strToHex);
-	 			str = openpgp_encoding_html_encode(str);
-	 			showMessages("<tt><p style=\"background-color: #ffffff; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\">"+str.replace(/\n/g,"<br>")+"</p></tt>");
+	 			this.print_debug(str);
 	 		}
 	 	};
 	 	
@@ -13400,8 +13427,7 @@
 	 	 * containing the HTML encoded error message
 	 	 */
 	 	this.print_error = function(str) {
-	 		str = openpgp_encoding_html_encode(str);
-	 		showMessages("<p style=\"font-size: 80%; background-color: #FF8888; margin:0; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\"><span style=\"color: #888;\"><b>ERROR:</b></span>	"+str.replace(/\n/g,"<br>")+"</p>");
+	 		compat.print_error(str);
 	 	};
 	 	
 	 	/**
@@ -13414,11 +13440,11 @@
 	 	 * containing the HTML encoded info message
 	 	 */
 	 	this.print_info = function(str) {
-	 		str = openpgp_encoding_html_encode(str);
-	 		showMessages("<p style=\"font-size: 80%; background-color: #88FF88; margin:0; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\"><span style=\"color: #888;\"><b>INFO:</b></span>	"+str.replace(/\n/g,"<br>")+"</p>");
+	 		compat.print_info(str);
 	 	};
 	 	
 	 	this.print_warning = function(str) {
+	 		compat.print_warning(str);
 	 		str = openpgp_encoding_html_encode(str);
 	 		showMessages("<p style=\"font-size: 80%; background-color: #FFAA88; margin:0; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\"><span style=\"color: #888;\"><b>WARNING:</b></span>	"+str.replace(/\n/g,"<br>")+"</p>");
 	 	};
@@ -13483,5 +13509,10 @@
 	  */
 	 var util = new Util();
 	exports.OpenPGP = _openpgp;
-	exports.global = openpgp;
+	exports.openpgp = openpgp;
 })(this);
+
+},{}]},{},[1])
+(1)
+});
+;

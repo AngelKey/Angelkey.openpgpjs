@@ -1,5 +1,7 @@
 
-require('../unittests').register("Encryption/decryption", function(test_result) {
+var openpgp = require('../../index').openpgp;
+
+require('../unittest').register("Encryption/decryption", function(test_result) {
 
 	openpgp.init();
 

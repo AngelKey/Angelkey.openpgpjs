@@ -44,9 +44,7 @@ function openpgp_encoding_base64_decode(message) {
  * @return {String} Html encoded string
  */
 function openpgp_encoding_html_encode(message) {
-	if (message == null)
-		return "";
-	return $('<div/>').text(message).html();
+	return compat.html_encode(message);
 }
 
 /**
