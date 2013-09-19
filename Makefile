@@ -8,6 +8,13 @@ help:
 	@echo "example        - creates a simple example"
 	@echo "ext-chr-gmail  - creates the Google Chrome / Google Mail extension"
 	@echo "documentation  - generates documentation. Requires jsdoc (3.2) in PATH"
+	@echo "build          - build the rolled-up output"
+
+OUT=resources/openpgp.js
+BROWSER=resources/openpgp.browser.js
+BROWSERIFY=node_modules/.bin/browserify
+
+all: $(OUT) $(BROWSER)
 
 update: update-me update-deps
 
@@ -16,6 +23,7 @@ update-me:
 
 update-deps:
 	@git submodule foreach git pull
+	npm install -d
 
 example:
 	@mkdir -p build
@@ -40,10 +48,22 @@ test:
 documentation:
 	@jsdoc src -r -d doc
 
-OUT=resources/openpgp.js
-build:
+
+$(OUT):
 	echo "(function (){ " > $(OUT)
 	echo "\tvar navigator = 'node';" >> $(OUT)
 	find src/ -type f -name '*.js' | xargs cat | awk '{ print "\t", $$0 }' >> $(OUT)
-	echo "\texports.openpgp = openpgp;" >> $(OUT)
+	echo "\texports.OpenPGP = _openpgp;" >> $(OUT)
+	echo "\texports.global = openpgp;" >> $(OUT)
 	echo "})(this);" >> $(OUT)
+
+build: $(OUT)
+
+$(BROWSER): $(OUT)
+	$(BROWSERIFY) $(OUT) -s openpgp > $(BROWSER)
+
+clean:
+	\rm -rf $(OUT) $(BROWSER)
+
+
+.PHONY: clean 

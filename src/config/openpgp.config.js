@@ -82,7 +82,7 @@ function openpgp_config() {
 	 * Writes the config to HTML5 local storage
 	 */
 	function write() {
-		compat.local_storage_write("config",JSON.stringify(this.config));
+		compat.local_storage_set("config",JSON.stringify(this.config));
 	}
 
 	this.read = read;

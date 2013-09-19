@@ -3,7 +3,7 @@ var compat;
 if (typeof window !== "undefined" && window !== null) {
 	compat = {
 		local_storage_get : function (k) {
-			return window.localStoage.getItem(k)
+			return window.localStorage.getItem(k)
 		},
 		local_storage_set : function (k,v) {
 			return window.localStorage.setItem(k,v);

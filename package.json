@@ -1,0 +1,21 @@
+{
+  "name":         "openpgp",
+  "description":  "A trivial node wrapper around OpenPGP.js",
+  "keywords":     ["crypto"],
+  "author":       "Maxwell Krohn",
+  "version":      "0.0.1",
+  "licenses":     [{
+    "type":       "LGPL",
+    "url":        "http://www.gnu.org/licenses/lgpl.html"
+  }],
+  "main" : "./resources/openpgp.js",
+  "homepage":     "http://github.com/keybase/openpgpjs",
+  "bugs":         "https://github.com/keybase/openpgpjs/issues",
+  "repository":   {
+    "type": "git",
+    "url": "git://github.com/keybase/openpgpjs.git"
+  },
+  "devDependencies" : {
+    "browserify" : "*"
+  }
+}

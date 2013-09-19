@@ -6138,7 +6138,7 @@
 	 if (typeof window !== "undefined" && window !== null) {
 	 	compat = {
 	 		local_storage_get : function (k) {
-	 			return window.localStoage.getItem(k)
+	 			return window.localStorage.getItem(k)
 	 		},
 	 		local_storage_set : function (k,v) {
 	 			return window.localStorage.setItem(k,v);
@@ -6157,13 +6157,13 @@
 	 };
 	 
 	 if (typeof window === "undefined" || window === null) {
-	   	crypto_mod = require('cry' + 'pto');
+	   	var crypto_mod = require('cry' + 'pto');
 	 	compat = {
-	 		local_storage_get : function (k) { return null; }
-	 		local_storage_set : function (k,v) { return null; }
+	 		local_storage_get : function (k) { return null; },
+	 		local_storage_set : function (k,v) { return null; },
 	 		get_random_byte : function () {
 	 			var buf = crypto_mod.rng(1);
-	 			return buf.readUint8(0);
+	 			return buf.readUInt8(0);
 	 		},
 	 		get_random_uint32 : function () {
 	 			var buf = crypto_mod.rng(1);
@@ -7482,7 +7482,7 @@
 	 	 * Writes the config to HTML5 local storage
 	 	 */
 	 	function write() {
-	 		compat.local_storage_write("config",JSON.stringify(this.config));
+	 		compat.local_storage_set("config",JSON.stringify(this.config));
 	 	}
 	 
 	 	this.read = read;
@@ -13482,5 +13482,6 @@
 	  * an instance that should be used. 
 	  */
 	 var util = new Util();
-	exports.openpgp = openpgp;
+	exports.OpenPGP = _openpgp;
+	exports.global = openpgp;
 })(this);
