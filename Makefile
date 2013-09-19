@@ -51,10 +51,9 @@ documentation:
 
 $(OUT):
 	echo "(function (){ " > $(OUT)
-	echo "\tvar navigator = 'node';" >> $(OUT)
+	cat pkg/pre.js | awk ' { print "\t", $$0 } ' >> $(OUT)
 	find src/ -type f -name '*.js' | xargs cat | awk '{ print "\t", $$0 }' >> $(OUT)
-	echo "\texports.OpenPGP = _openpgp;" >> $(OUT)
-	echo "\texports.openpgp = openpgp;" >> $(OUT)
+	cat pkg/post.js | awk ' { print "\t", $$0 } ' >> $(OUT)
 	echo "})(this);" >> $(OUT)
 
 build: $(OUT) $(BROWSER)

@@ -16,7 +16,9 @@ if (typeof window === "undefined" || window === null) {
 		print_debug : function (msg) { console.log("D " + msg); },
 		print_error : function (msg) { console.log("E " + msg); },
 		print_info : function (msg)  { console.log("I " + msg); },
-		print_warning : function (msg) { console.log("W " + msg); }
+		print_warning : function (msg) { console.log("W " + msg); },
+		get_navigator : function () { return { appName : "node" }; }
+
 	};
 };
 

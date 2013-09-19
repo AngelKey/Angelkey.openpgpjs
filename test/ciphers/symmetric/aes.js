@@ -1,5 +1,10 @@
 
-require('../unittests').register("AES Rijndael cipher test with test vectors from ecb_tbl.txt", function(test_case) {
+var openpgp = require('../../../index');
+var AESencrypt = openpgp.ciphers.symmetric.AES.encrypt;
+var keyExpansion = openpgp.ciphers.symmetric.AES.keyExpansion;
+var util = openpgp.util;
+
+require('../../unittest').register("AES Rijndael cipher test with test vectors from ecb_tbl.txt", function(test_result) {
 	var result = new Array();
 	function test_aes(input, key, output) {
 		return (util.hexstrdump(util.bin2str(AESencrypt(input,keyExpansion(util.bin2str(key))))) == util.hexstrdump(util.bin2str(output)));

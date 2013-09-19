@@ -1,5 +1,73 @@
 (function (){ 
-	var navigator = 'node';
+	 // _compat first because it should come first in the output.
+	 var compat;
+	 if (typeof window !== "undefined" && window !== null) {
+	 	compat = {
+	 		local_storage_get : function (k) {
+	 			return window.localStorage.getItem(k)
+	 		},
+	 		local_storage_set : function (k,v) {
+	 			return window.localStorage.setItem(k,v);
+	 		},
+	 		get_random_byte : function () {
+	 			var buf = new Uint8Array(1);
+	 			window.crypto.getRandomValues(buf);
+	 			return buf[1];
+	 		},
+	 		get_random_uint32 : function () {
+	 			var buf = new Uint32Array(1);
+	 			window.crypto.getRandomValues(buf);
+	 			return buf[1];
+	 		},
+	 		html_encode : function (message) {
+	 			if (message == null)
+	 				return "";
+	 			return $('<div/>').text(message).html();
+	 		},
+	 		print_debug : function (str) {
+	 			str = compat.html_encode(str);
+	 			compat.showMessages("<tt><p style=\"background-color: #ffffff; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\">"+str.replace(/\n/g,"<br>")+"</p></tt>");
+	 		},
+	 		print_error : function (str) {
+	 			str = openpgp_encoding_html_encode(str);
+	 			showMessages("<p style=\"font-size: 80%; background-color: #FF8888; margin:0; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\"><span style=\"color: #888;\"><b>ERROR:</b></span>	"+str.replace(/\n/g,"<br>")+"</p>");
+	 		},
+	 		print_info : function (str) {
+	 			str = openpgp_encoding_html_encode(str);
+	 			showMessages("<p style=\"font-size: 80%; background-color: #88FF88; margin:0; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\"><span style=\"color: #888;\"><b>INFO:</b></span>	"+str.replace(/\n/g,"<br>")+"</p>");
+	 		},
+	 		print_warning : function (str) {
+	 			str = openpgp_encoding_html_encode(str);
+	 			showMessages("<p style=\"font-size: 80%; background-color: #FFAA88; margin:0; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\"><span style=\"color: #888;\"><b>WARNING:</b></span>	"+str.replace(/\n/g,"<br>")+"</p>");
+	 		},
+	 		get_navigator : function () { return navigator; }
+	 	};
+	 };
+	 
+	 if (typeof window === "undefined" || window === null) {
+	   	var crypto_mod = require('cry' + 'pto');
+	   	var _store = {};
+	 	compat = {
+	 		local_storage_get : function (k) { return _store[k] || null; },
+	 		local_storage_set : function (k,v) { return (_store[k] = v); },
+	 		get_random_byte : function () {
+	 			var buf = crypto_mod.rng(1);
+	 			return buf.readUInt8(0);
+	 		},
+	 		get_random_uint32 : function () {
+	 			var buf = crypto_mod.rng(1);
+	 			return buf.readUint8(0);
+	 		},
+	 		html_encode : function (msg) { return msg; },
+	 		print_debug : function (msg) { console.log("D " + msg); },
+	 		print_error : function (msg) { console.log("E " + msg); },
+	 		print_info : function (msg)  { console.log("I " + msg); },
+	 		print_warning : function (msg) { console.log("W " + msg); },
+	 		get_navigator : function () { return { appName : "node" }; }
+	 
+	 	};
+	 };
+	 
 	 // GPG4Browsers - An OpenPGP implementation in javascript
 	 // Copyright (C) 2011 Recurity Labs GmbH
 	 // 
@@ -296,11 +364,11 @@
 	   }
 	   return c;
 	 }
-	 if(j_lm && (navigator.appName == "Microsoft Internet Explorer")) {
+	 if(j_lm && (compat.get_navigator().appName == "Microsoft Internet Explorer")) {
 	   BigInteger.prototype.am = am2;
 	   dbits = 30;
 	 }
-	 else if(j_lm && (navigator.appName != "Netscape")) {
+	 else if(j_lm && (compat.get_navigator().appName != "Netscape")) {
 	   BigInteger.prototype.am = am1;
 	   dbits = 26;
 	 }
@@ -6132,72 +6200,6 @@
 	 		finalize: tfsFinal
 	 	};
 	 }
-	 
-	 
-	 var compat;
-	 if (typeof window !== "undefined" && window !== null) {
-	 	compat = {
-	 		local_storage_get : function (k) {
-	 			return window.localStorage.getItem(k)
-	 		},
-	 		local_storage_set : function (k,v) {
-	 			return window.localStorage.setItem(k,v);
-	 		},
-	 		get_random_byte : function () {
-	 			var buf = new Uint8Array(1);
-	 			window.crypto.getRandomValues(buf);
-	 			return buf[1];
-	 		},
-	 		get_random_uint32 : function () {
-	 			var buf = new Uint32Array(1);
-	 			window.crypto.getRandomValues(buf);
-	 			return buf[1];
-	 		},
-	 		html_encode : function (message) {
-	 			if (message == null)
-	 				return "";
-	 			return $('<div/>').text(message).html();
-	 		},
-	 		print_debug : function (str) {
-	 			str = compat.html_encode(str);
-	 			compat.showMessages("<tt><p style=\"background-color: #ffffff; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\">"+str.replace(/\n/g,"<br>")+"</p></tt>");
-	 		},
-	 		print_error : function (str) {
-	 			str = openpgp_encoding_html_encode(str);
-	 			showMessages("<p style=\"font-size: 80%; background-color: #FF8888; margin:0; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\"><span style=\"color: #888;\"><b>ERROR:</b></span>	"+str.replace(/\n/g,"<br>")+"</p>");
-	 		},
-	 		print_info : function (str) {
-	 			str = openpgp_encoding_html_encode(str);
-	 			showMessages("<p style=\"font-size: 80%; background-color: #88FF88; margin:0; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\"><span style=\"color: #888;\"><b>INFO:</b></span>	"+str.replace(/\n/g,"<br>")+"</p>");
-	 		},
-	 		print_warning : function (str) {
-	 			str = openpgp_encoding_html_encode(str);
-	 			showMessages("<p style=\"font-size: 80%; background-color: #FFAA88; margin:0; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\"><span style=\"color: #888;\"><b>WARNING:</b></span>	"+str.replace(/\n/g,"<br>")+"</p>");
-	 		}
-	 	};
-	 };
-	 
-	 if (typeof window === "undefined" || window === null) {
-	   	var crypto_mod = require('cry' + 'pto');
-	   	var _store = {};
-	 	compat = {
-	 		local_storage_get : function (k) { return _store[k] || null; },
-	 		local_storage_set : function (k,v) { return (_store[k] = v); },
-	 		get_random_byte : function () {
-	 			var buf = crypto_mod.rng(1);
-	 			return buf.readUInt8(0);
-	 		},
-	 		get_random_uint32 : function () {
-	 			var buf = crypto_mod.rng(1);
-	 			return buf.readUint8(0);
-	 		},
-	 		html_encode : function (msg) { return msg; },
-	 		print_debug : function (msg) { console.log("D " + msg); },
-	 		print_error : function (msg) { console.log("E " + msg); },
-	 		print_info : function (msg)  { console.log("I " + msg); },
-	 		print_warning : function (msg) { console.log("W " + msg); }
-	 	};
-	 };
 	 
 	 JXG = {exists: (function(undefined){return function(v){return !(v===undefined || v===null);}})()};
 	 JXG.decompress = function(str) {return unescape((new JXG.Util.Unzip(JXG.Util.Base64.decodeAsArray(str))).unzip()[0][0]);};
@@ -13506,6 +13508,15 @@
 	  * an instance that should be used. 
 	  */
 	 var util = new Util();
-	exports.OpenPGP = _openpgp;
-	exports.openpgp = openpgp;
+	 exports.OpenPGP = _openpgp;
+	 exports.openpgp = openpgp;
+	 exports.ciphers = {
+	 	symmetric : {
+	 		AES: {
+	 			encrypt : AESencrypt,
+	 			keyExpansion : keyExpansion
+	 		}
+	 	}
+	 };
+	 exports.util = util;
 })(this);

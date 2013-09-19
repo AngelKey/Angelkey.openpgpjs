@@ -2,7 +2,8 @@
 var unittest = require('./unittest');
 var colors = require('colors');
 var test_files = [
-	'./general/openpgp.basic.js'
+	'./general/openpgp.basic.js',
+	'./ciphers/symmetric/aes.js'
 ];
 
 // By requiring all of the files, they will in turn register themselves
