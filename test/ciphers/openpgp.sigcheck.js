@@ -1,4 +1,4 @@
-unittests.register("Testing of binary signature checking", function() {
+require('../unittests').register("Testing of binary signature checking", function(test_result) {
   var result = new Array();
   var priv_key = openpgp.read_privateKey([
         '-----BEGIN PGP PRIVATE KEY BLOCK-----',

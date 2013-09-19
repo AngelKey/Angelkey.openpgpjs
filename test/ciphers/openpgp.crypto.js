@@ -1,5 +1,5 @@
 
-unittests.register("Functional testing of openpgp_crypto_* methods", function() {
+require('../unittests').register("Functional testing of openpgp_crypto_* methods", function(test_result) {
 	var result = new Array();
 	var RSApubMPIstrs = [
               util.bin2str([0x08,0x00,0xac,0x15,0xb3,0xd6,0xd2,0x0f,0xf0,0x7a,0xdd,0x21,0xb7,

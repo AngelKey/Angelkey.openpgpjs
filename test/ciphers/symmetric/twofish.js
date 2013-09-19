@@ -1,5 +1,5 @@
 
-unittests.register("Twofish test with test vectors from http://www.schneier.com/code/ecb_ival.txt", function() {
+require('../unittests').register("Twofish test with test vectors from http://www.schneier.com/code/ecb_ival.txt", function(test_result) {
 	var result = new Array();
 	var start = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	var start_short = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];

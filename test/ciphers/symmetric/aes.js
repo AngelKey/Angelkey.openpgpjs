@@ -1,5 +1,5 @@
 
-unittests.register("AES Rijndael cipher test with test vectors from ecb_tbl.txt", function() {
+require('../unittests').register("AES Rijndael cipher test with test vectors from ecb_tbl.txt", function(test_case) {
 	var result = new Array();
 	function test_aes(input, key, output) {
 		return (util.hexstrdump(util.bin2str(AESencrypt(input,keyExpansion(util.bin2str(key))))) == util.hexstrdump(util.bin2str(output)));

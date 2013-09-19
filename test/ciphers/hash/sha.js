@@ -1,5 +1,5 @@
 
-unittests.register("SHA* test with test vectors from NIST FIPS 180-2", function() {
+require('../unittests').register("SHA* test with test vectors from NIST FIPS 180-2", function(test_result) {
 	var result = new Array();
 	
 	result[0] = new test_result("SHA1 - a9993e364706816aba3e25717850c26c9cd0d89d = str_sha1(\"abc\") ",
