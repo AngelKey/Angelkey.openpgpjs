@@ -39,3 +39,11 @@ test:
 
 documentation:
 	@jsdoc src -r -d doc
+
+OUT=resources/openpgp.js
+build:
+	echo "(function (){ " > $(OUT)
+	echo "\tvar navigator = 'node';" >> $(OUT)
+	find src/ -type f -name '*.js' | xargs cat | awk '{ print "\t", $$0 }' >> $(OUT)
+	echo "\texports.openpgp = openpgp;" >> $(OUT)
+	echo "})(this);" >> $(OUT)

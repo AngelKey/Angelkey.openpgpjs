@@ -340,18 +340,15 @@ function openpgp_crypto_getPseudoRandom(from, to) {
  * @return {Integer} A secure random number
  */
 function openpgp_crypto_getSecureRandom(from, to) {
-	var buf = new Uint32Array(1);
-	window.crypto.getRandomValues(buf);
+	var val = compat.get_random_uint32();
 	var bits = ((to-from)).toString(2).length;
-	while ((buf[0] & (Math.pow(2, bits) -1)) > (to-from))
-		window.crypto.getRandomValues(buf);
-	return from+(Math.abs(buf[0] & (Math.pow(2, bits) -1)));
+	while ((val & (Math.pow(2, bits) -1)) > (to-from))
+		val = compat.get_random_uint32();
+	return from+(Math.abs(val & (Math.pow(2, bits) -1)));
 }
 
 function openpgp_crypto_getSecureRandomOctet() {
-	var buf = new Uint32Array(1);
-	window.crypto.getRandomValues(buf);
-	return buf[0] & 0xFF;
+	return compat.get_random_byte();
 }
 
 /**
