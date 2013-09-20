@@ -57,3 +57,4 @@ exports.hash = {
 	}
 };
 exports.util = util;
+exports.compat = compat;
