@@ -13528,6 +13528,9 @@ return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requi
 	 			createKeys : des_createKeys,
 	 			desede : desede,
 	 			des : des
+	 		},
+	 		Twofish : {
+	 			encrypt : TFencrypt
 	 		}
 	 	}
 	 };

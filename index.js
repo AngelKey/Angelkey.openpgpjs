@@ -13526,6 +13526,9 @@
 	 			createKeys : des_createKeys,
 	 			desede : desede,
 	 			des : des
+	 		},
+	 		Twofish : {
+	 			encrypt : TFencrypt
 	 		}
 	 	}
 	 };
