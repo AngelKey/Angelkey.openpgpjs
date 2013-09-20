@@ -9,6 +9,7 @@ var test_files = [
 	'./ciphers/symmetric/des.js',
 	'./ciphers/symmetric/twofish.js',
 	'./ciphers/hash/md5.js',
+	'./ciphers/hash/ripe-md.js',
 	'./ciphers/hash/sha.js'
 ];
 

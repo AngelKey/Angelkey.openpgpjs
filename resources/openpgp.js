@@ -13544,6 +13544,10 @@ return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requi
 	 			sha384 : str_sha384,
 	 			sha512 : str_sha512
 	 		}
+	 	},
+	 	RipeMD : {
+	 		hash : RMD,
+	 		str : RMDstring
 	 	}
 	 };
 	 exports.util = util;

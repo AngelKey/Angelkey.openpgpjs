@@ -13542,6 +13542,10 @@
 	 			sha384 : str_sha384,
 	 			sha512 : str_sha512
 	 		}
+	 	},
+	 	RipeMD : {
+	 		hash : RMD,
+	 		str : RMDstring
 	 	}
 	 };
 	 exports.util = util;
