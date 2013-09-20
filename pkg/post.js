@@ -5,6 +5,9 @@ exports.ciphers = {
 		AES: {
 			encrypt : AESencrypt,
 			keyExpansion : keyExpansion
+		},
+		Blowfish : {
+			encrypt : BFencrypt
 		}
 	}
 };

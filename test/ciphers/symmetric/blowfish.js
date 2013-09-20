@@ -1,5 +1,8 @@
+var openpgp = require('../../../index');
+var BFencrypt = openpgp.ciphers.symmetric.Blowfish.encrypt;
+var util = openpgp.util;
 
-require('../unittests').register("Blowfish cipher test with test vectors from http://www.schneier.com/code/vectors.txt", function(test_result) {
+require('../../unittest').register("Blowfish cipher test with test vectors from http://www.schneier.com/code/vectors.txt", function(test_result) {
 	var result = new Array();
 	function test_bf(input, key, output) {
 		return (util.hexstrdump(util.bin2str(BFencrypt(input,util.bin2str(key)))) == util.hexstrdump(util.bin2str(output)));
