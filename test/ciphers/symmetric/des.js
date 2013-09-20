@@ -1,5 +1,12 @@
+var openpgp = require('../../../index');
+var DES = openpgp.ciphers.symmetric.DES;
+var des = DES.des;
+var desede = DES.desede;
+var des_createKeys = DES.createKeys;
+var util = openpgp.util;
+var unittest = require('../../unittest');
 
-require('../unittests').register("TripleDES (EDE) cipher test with test vectors from http://csrc.nist.gov/publications/nistpubs/800-20/800-20.pdf", function(test_result) {
+unittest.register("TripleDES (EDE) cipher test with test vectors from http://csrc.nist.gov/publications/nistpubs/800-20/800-20.pdf", function(test_result) {
 	var result = new Array();
 	var key = util.bin2str([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
 	var testvectors = [[[0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00],[0x95,0xF8,0xA5,0xE5,0xDD,0x31,0xD9,0x00]],
@@ -89,7 +96,7 @@ require('../unittests').register("TripleDES (EDE) cipher test with test vectors 
 });
 
 
-unittests.register("DES encrypt/decrypt padding tests", function() {
+unittest.register("DES encrypt/decrypt padding tests", function(test_result) {
 	var result = new Array();
 	var key = util.bin2str([0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF]);
     var testvectors = new Array();

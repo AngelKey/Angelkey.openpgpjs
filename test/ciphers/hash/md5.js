@@ -1,5 +1,8 @@
+var openpgp = require('../../../index');
+var MD5 = openpgp.hash.MD5;
+var util = openpgp.util;
 
-require('../unittests').register("MD5 test with test vectors from RFC 1321", function(test_result) {
+require('../../unittest').register("MD5 test with test vectors from RFC 1321", function(test_result) {
 	var result = new Array();
 	result[0] = new test_result("MD5 (\"\") = d41d8cd98f00b204e9800998ecf8427e",
 			util.hexstrdump(MD5("")) == "d41d8cd98f00b204e9800998ecf8427e");

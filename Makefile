@@ -12,6 +12,7 @@ help:
 
 OUT=index.js
 BROWSER=resources/openpgp.js
+TEST_BROWSER=resources/test.js
 BROWSERIFY=node_modules/.bin/browserify
 
 all: $(OUT) $(BROWSER)
@@ -52,17 +53,20 @@ documentation:
 $(OUT):
 	echo "(function (){ " > $(OUT)
 	cat pkg/pre.js | awk ' { print "\t", $$0 } ' >> $(OUT)
-	find src/ -type f -name '*.js' | xargs cat | awk '{ print "\t", $$0 }' >> $(OUT)
+	find src/ -type f -name '*.js' | sort | xargs cat | awk '{ print "\t", $$0 }' >> $(OUT)
 	cat pkg/post.js | awk ' { print "\t", $$0 } ' >> $(OUT)
 	echo "})(this);" >> $(OUT)
 
-build: $(OUT) $(BROWSER)
+build: $(OUT) $(BROWSER) $(TEST_BROWSER)
 
 $(BROWSER): $(OUT)
-	$(BROWSERIFY) $(OUT) -s openpgp > $(BROWSER)
+	$(BROWSERIFY) $(OUT) -s openpgp > $@
+
+$(TEST_BROWSER): $(OUT) test/browser.js
+	$(BROWSERIFY) test/browser.js -s test > $@
 
 clean:
-	\rm -rf $(OUT) $(BROWSER)
+	\rm -rf $(OUT) $(BROWSER) $(TEST_BROWSER)
 
 
 .PHONY: clean test

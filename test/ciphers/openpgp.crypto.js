@@ -1,5 +1,20 @@
+var openpgp = require('../../index');
+var util = openpgp.util;
+var crypto = openpgp.crypto;
+var encoding = openpgp.encoding;
+var openpgp_type_mpi = openpgp.type.mpi;
+var openpgp_crypto_signData = crypto.signData;
+var openpgp_crypto_verifySignature = crypto.verifySignature;
+var openpgp_crypto_generateSessionKey = crypto.generateSessionKey;
+var openpgp_crypto_getPrefixRandom  = crypto.getPrefixRandom;
+var openpgp_crypto_symmetricEncrypt = crypto.symmetricEncrypt;
+var openpgp_crypto_asymetricEncrypt = crypto.asymetricEncrypt;
+var openpgp_crypto_symmetricDecrypt = crypto.symmetricDecrypt;
+var openpgp_crypto_asymetricDecrypt = crypto.asymetricDecrypt;
+var openpgp_encoding_eme_pkcs1_encode = encoding.eme_pkcs1_encode;
+var openpgp_encoding_eme_pkcs1_decode = encoding.eme_pkcs1_decode;
 
-require('../unittests').register("Functional testing of openpgp_crypto_* methods", function(test_result) {
+require('../unittest').register("Functional testing of openpgp_crypto_* methods", function(test_result) {
 	var result = new Array();
 	var RSApubMPIstrs = [
               util.bin2str([0x08,0x00,0xac,0x15,0xb3,0xd6,0xd2,0x0f,0xf0,0x7a,0xdd,0x21,0xb7,

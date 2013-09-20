@@ -242,8 +242,6 @@ var Util = function() {
 	
 	this.print_warning = function(str) {
 		compat.print_warning(str);
-		str = openpgp_encoding_html_encode(str);
-		showMessages("<p style=\"font-size: 80%; background-color: #FFAA88; margin:0; width: 652px; word-break: break-word; padding: 5px; border-bottom: 1px solid black;\"><span style=\"color: #888;\"><b>WARNING:</b></span>	"+str.replace(/\n/g,"<br>")+"</p>");
 	};
 	
 	this.getLeftNBits = function (string, bitcount) {

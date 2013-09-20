@@ -1,5 +1,8 @@
+var openpgp = require('../../../index');
+var util = openpgp.util;
+var RMDstring = openpgp.hash.RipeMD.str;
 
-require('../unittests').register("RIPE-MD 160 bits test with test vectors from http://homes.esat.kuleuven.be/~bosselae/ripemd160.html", function(test_result) {
+require('../../unittest').register("RIPE-MD 160 bits test with test vectors from http://homes.esat.kuleuven.be/~bosselae/ripemd160.html", function(test_result) {
 	var result = new Array();
 	result[0] = new test_result("RMDstring (\"\") = 9c1185a5c5e9fc54612808977ee8f548b2258d31",
 			util.hexstrdump(RMDstring("")) == "9c1185a5c5e9fc54612808977ee8f548b2258d31");
