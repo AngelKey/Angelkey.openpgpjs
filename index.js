@@ -13532,5 +13532,8 @@
 	 		}
 	 	}
 	 };
+	 exports.hash = {
+	 	MD5 : MD5
+	 };
 	 exports.util = util;
 })(this);

@@ -13534,6 +13534,9 @@ return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requi
 	 		}
 	 	}
 	 };
+	 exports.hash = {
+	 	MD5 : MD5
+	 };
 	 exports.util = util;
 })(this);
 
