@@ -4,7 +4,7 @@ var unittest = require('./unittest')
 // List all of the tests to run here.
 // By requiring them, they will register with the 
 // global unittest object above.
-require('./general/openpgp.basic.js');
+//require('./general/openpgp.basic.js');
 require('./ciphers/symmetric/aes.js');
 require('./ciphers/symmetric/blowfish.js');
 require('./ciphers/symmetric/cast5.js');

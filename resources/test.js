@@ -13582,7 +13582,7 @@ var unittest = require('./unittest')
 // List all of the tests to run here.
 // By requiring them, they will register with the 
 // global unittest object above.
-require('./general/openpgp.basic.js');
+//require('./general/openpgp.basic.js');
 require('./ciphers/symmetric/aes.js');
 require('./ciphers/symmetric/blowfish.js');
 require('./ciphers/symmetric/cast5.js');
@@ -13596,7 +13596,7 @@ require('./ciphers/openpgp.sigcheck.js');
 
 exports.unittest = unittest;
 exports.lib = require('../index');
-},{"../index":1,"./ciphers/hash/md5.js":3,"./ciphers/hash/ripe-md.js":4,"./ciphers/hash/sha.js":5,"./ciphers/openpgp.crypto.js":6,"./ciphers/openpgp.sigcheck.js":7,"./ciphers/symmetric/aes.js":8,"./ciphers/symmetric/blowfish.js":9,"./ciphers/symmetric/cast5.js":10,"./ciphers/symmetric/des.js":11,"./ciphers/symmetric/twofish.js":12,"./general/openpgp.basic.js":13,"./unittest":14}],3:[function(require,module,exports){
+},{"../index":1,"./ciphers/hash/md5.js":3,"./ciphers/hash/ripe-md.js":4,"./ciphers/hash/sha.js":5,"./ciphers/openpgp.crypto.js":6,"./ciphers/openpgp.sigcheck.js":7,"./ciphers/symmetric/aes.js":8,"./ciphers/symmetric/blowfish.js":9,"./ciphers/symmetric/cast5.js":10,"./ciphers/symmetric/des.js":11,"./ciphers/symmetric/twofish.js":12,"./unittest":13}],3:[function(require,module,exports){
 var openpgp = require('../../../index');
 var MD5 = openpgp.hash.MD5;
 var util = openpgp.util;
@@ -13618,7 +13618,7 @@ require('../../unittest').register("MD5 test with test vectors from RFC 1321", f
 	return result;
 });
 
-},{"../../../index":1,"../../unittest":14}],4:[function(require,module,exports){
+},{"../../../index":1,"../../unittest":13}],4:[function(require,module,exports){
 var openpgp = require('../../../index');
 var util = openpgp.util;
 var RMDstring = openpgp.hash.RipeMD.str;
@@ -13636,7 +13636,7 @@ require('../../unittest').register("RIPE-MD 160 bits test with test vectors from
 	return result;
 });
 
-},{"../../../index":1,"../../unittest":14}],5:[function(require,module,exports){
+},{"../../../index":1,"../../unittest":13}],5:[function(require,module,exports){
 var openpgp = require('../../../index');
 var util = openpgp.util;
 var str = openpgp.hash.SHA.str;
@@ -13667,7 +13667,7 @@ require('../../unittest').register("SHA* test with test vectors from NIST FIPS 1
 	return result;
 });
 
-},{"../../../index":1,"../../unittest":14}],6:[function(require,module,exports){
+},{"../../../index":1,"../../unittest":13}],6:[function(require,module,exports){
 var openpgp = require('../../index');
 var util = openpgp.util;
 var crypto = openpgp.crypto;
@@ -13951,7 +13951,7 @@ require('../unittest').register("Functional testing of openpgp_crypto_* methods"
 	return result;
 });
 
-},{"../../index":1,"../unittest":14}],7:[function(require,module,exports){
+},{"../../index":1,"../unittest":13}],7:[function(require,module,exports){
 var mod = require('../../index');
 var openpgp = mod.openpgp;
 var util = mod.util;
@@ -14125,7 +14125,7 @@ require('../unittest').register("Testing of binary signature checking", function
 })
 
 
-},{"../../index":1,"../unittest":14}],8:[function(require,module,exports){
+},{"../../index":1,"../unittest":13}],8:[function(require,module,exports){
 
 var openpgp = require('../../../index');
 var AESencrypt = openpgp.ciphers.symmetric.AES.encrypt;
@@ -14243,7 +14243,7 @@ require('../../unittest').register("AES Rijndael cipher test with test vectors f
 	return result;
 });
 
-},{"../../../index":1,"../../unittest":14}],9:[function(require,module,exports){
+},{"../../../index":1,"../../unittest":13}],9:[function(require,module,exports){
 var openpgp = require('../../../index');
 var BFencrypt = openpgp.ciphers.symmetric.Blowfish.encrypt;
 var util = openpgp.util;
@@ -14307,7 +14307,7 @@ require('../../unittest').register("Blowfish cipher test with test vectors from 
 	return result;
 });
 
-},{"../../../index":1,"../../unittest":14}],10:[function(require,module,exports){
+},{"../../../index":1,"../../unittest":13}],10:[function(require,module,exports){
 var openpgp = require('../../../index');
 var cast5_encrypt = openpgp.ciphers.symmetric.Cast5.encrypt;
 var util = openpgp.util;
@@ -14330,7 +14330,7 @@ require('../../unittest').register("CAST-128 cipher test with test vectors from 
 	return result;
 });
 
-},{"../../../index":1,"../../unittest":14}],11:[function(require,module,exports){
+},{"../../../index":1,"../../unittest":13}],11:[function(require,module,exports){
 var openpgp = require('../../../index');
 var DES = openpgp.ciphers.symmetric.DES;
 var des = DES.des;
@@ -14494,7 +14494,7 @@ unittest.register("DES encrypt/decrypt padding tests", function(test_result) {
 
 
 
-},{"../../../index":1,"../../unittest":14}],12:[function(require,module,exports){
+},{"../../../index":1,"../../unittest":13}],12:[function(require,module,exports){
 var openpgp = require('../../../index');
 var TFencrypt = openpgp.ciphers.symmetric.Twofish.encrypt;
 var util = openpgp.util;
@@ -14556,79 +14556,7 @@ require('../../unittest').register("Twofish test with test vectors from http://w
 	return result;
 });
 
-},{"../../../index":1,"../../unittest":14}],13:[function(require,module,exports){
-
-var openpgp = require('../../index').openpgp;
-
-require('../unittest').register("Encryption/decryption", function(test_result) {
-
-	openpgp.init();
-
-
-	function test(passphrase, userid, message) {
-		var key = openpgp.generate_key_pair(1, 512, userid, passphrase),
-			priv_key = key.privateKey,
-			pub_key = openpgp.read_publicKey(key.publicKeyArmored);
-
-		var info = '\npassphrase: ' + passphrase + '\n'
-				+ 'userid: ' + userid + '\n'
-				+ 'message: ' + message;
-
-		if(!priv_key.decryptSecretMPIs(passphrase)) {
-			return new test_result('Generating a decryptable private key failed'
-				+ info,
-				false);
-		}
-
-		var encrypted = openpgp.write_signed_and_encrypted_message(priv_key,
-			pub_key, message);
-
-		openpgp.keyring.importPublicKey(key.publicKeyArmored)
-
-
-		var msg = openpgp.read_message(encrypted);
-		var keymat = null;
-		var sesskey = null;
-
-		// Find the private (sub)key for the session key of the message
-		for (var i = 0; i< msg[0].sessionKeys.length; i++) {
-			if (priv_key.privateKeyPacket.publicKey.getKeyId() == msg[0].sessionKeys[i].keyId.bytes) {
-				keymat = { key: priv_key, keymaterial: priv_key.privateKeyPacket};
-				sesskey = msg[0].sessionKeys[i];
-				break;
-			}
-			for (var j = 0; j < priv_key.subKeys.length; j++) {
-				if (priv_key.subKeys[j].publicKey.getKeyId() == msg[0].sessionKeys[i].keyId.bytes) {
-					keymat = { key: priv_key, keymaterial: priv_key.subKeys[j]};
-					sesskey = msg[0].sessionKeys[i];
-					break;
-				}
-			}
-		}
-
-		var decrypted = ''
-		if (keymat != null) {
-			if (!keymat.keymaterial.decryptSecretMPIs(passphrase)) {
-				return new test_result("Password for secrect key was incorrect!", 
-					+ info, false)
-			}
-
-			decrypted = msg[0].decrypt(keymat, sesskey);
-		} else {
-			return new test_result("No private key found!" + info, false);
-		}
-			
-		return new test_result(message + ' == ' + decrypted + info, message == decrypted);
-	}
-
-	var result = []
-	result.push(test('password', 'Test McTestington <test@example.com>', 'hello world'));
-	result.push(test('●●●●', '♔♔♔♔ <test@example.com>', 'łäóć'));
-
-	return result
-});
-
-},{"../../index":1,"../unittest":14}],14:[function(require,module,exports){
+},{"../../../index":1,"../../unittest":13}],13:[function(require,module,exports){
 
 function test_result(str_description, boolean_result) {
 	this.description = str_description;
