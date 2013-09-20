@@ -8,7 +8,8 @@ var test_files = [
 	'./ciphers/symmetric/cast5.js',
 	'./ciphers/symmetric/des.js',
 	'./ciphers/symmetric/twofish.js',
-	'./ciphers/hash/md5.js'
+	'./ciphers/hash/md5.js',
+	'./ciphers/hash/sha.js'
 ];
 
 // By requiring all of the files, they will in turn register themselves
