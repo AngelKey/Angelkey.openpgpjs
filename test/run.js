@@ -10,7 +10,8 @@ var test_files = [
 	'./ciphers/symmetric/twofish.js',
 	'./ciphers/hash/md5.js',
 	'./ciphers/hash/ripe-md.js',
-	'./ciphers/hash/sha.js'
+	'./ciphers/hash/sha.js',
+	'./ciphers/openpgp.crypto.js'
 ];
 
 // By requiring all of the files, they will in turn register themselves

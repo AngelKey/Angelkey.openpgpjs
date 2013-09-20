@@ -13532,6 +13532,23 @@
 	 		}
 	 	}
 	 };
+	 exports.crypto = {
+	 	asymetricEncrypt : openpgp_crypto_asymetricEncrypt,
+	 	asymetricDecrypt : openpgp_crypto_asymetricDecrypt,
+	 	symmetricEncrypt : openpgp_crypto_symmetricEncrypt,
+	 	symmetricDecrypt : openpgp_crypto_symmetricDecrypt,
+	 	verifySignature  : openpgp_crypto_verifySignature,
+	 	signData : openpgp_crypto_signData,
+	 	getPrefixRandom : openpgp_crypto_getPrefixRandom,
+	 	generateSessionKey : openpgp_crypto_generateSessionKey
+	 };
+	 exports.type = {
+	 	mpi : openpgp_type_mpi
+	 };
+	 exports.encoding = {
+	 	eme_pkcs1_decode : openpgp_encoding_eme_pkcs1_decode,
+	 	eme_pkcs1_encode : openpgp_encoding_eme_pkcs1_encode
+	 };
 	 exports.hash = {
 	 	MD5 : MD5,
 	 	SHA : {
