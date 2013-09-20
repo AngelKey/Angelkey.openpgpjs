@@ -8,6 +8,9 @@ exports.ciphers = {
 		},
 		Blowfish : {
 			encrypt : BFencrypt
+		},
+		Cast5 : {
+			encrypt : cast5_encrypt
 		}
 	}
 };

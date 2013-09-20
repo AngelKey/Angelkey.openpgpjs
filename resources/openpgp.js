@@ -13520,6 +13520,9 @@ return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requi
 	 		},
 	 		Blowfish : {
 	 			encrypt : BFencrypt
+	 		},
+	 		Cast5 : {
+	 			encrypt : cast5_encrypt
 	 		}
 	 	}
 	 };
