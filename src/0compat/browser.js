@@ -11,12 +11,12 @@ if (typeof window !== "undefined" && window !== null) {
 		get_random_byte : function () {
 			var buf = new Uint8Array(1);
 			window.crypto.getRandomValues(buf);
-			return buf[1];
+			return buf[0];
 		},
 		get_random_uint32 : function () {
 			var buf = new Uint32Array(1);
 			window.crypto.getRandomValues(buf);
-			return buf[1];
+			return buf[0];
 		},
 		html_encode : function (message) {
 			if (message == null)
