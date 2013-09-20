@@ -13551,6 +13551,7 @@ return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requi
 	 	eme_pkcs1_decode : openpgp_encoding_eme_pkcs1_decode,
 	 	eme_pkcs1_encode : openpgp_encoding_eme_pkcs1_encode
 	 };
+	 exports.keyring = openpgp_keyring;
 	 exports.hash = {
 	 	MD5 : MD5,
 	 	SHA : {

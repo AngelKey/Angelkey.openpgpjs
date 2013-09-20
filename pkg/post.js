@@ -39,6 +39,7 @@ exports.encoding = {
 	eme_pkcs1_decode : openpgp_encoding_eme_pkcs1_decode,
 	eme_pkcs1_encode : openpgp_encoding_eme_pkcs1_encode
 };
+exports.keyring = openpgp_keyring;
 exports.hash = {
 	MD5 : MD5,
 	SHA : {

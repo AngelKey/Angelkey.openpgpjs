@@ -11,7 +11,8 @@ var test_files = [
 	'./ciphers/hash/md5.js',
 	'./ciphers/hash/ripe-md.js',
 	'./ciphers/hash/sha.js',
-	'./ciphers/openpgp.crypto.js'
+	'./ciphers/openpgp.crypto.js',
+	'./ciphers/openpgp.sigcheck.js'
 ];
 
 // By requiring all of the files, they will in turn register themselves
