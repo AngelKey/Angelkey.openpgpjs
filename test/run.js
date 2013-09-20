@@ -5,7 +5,8 @@ var test_files = [
 	'./general/openpgp.basic.js',
 	'./ciphers/symmetric/aes.js',
 	'./ciphers/symmetric/blowfish.js',
-	'./ciphers/symmetric/cast5.js'
+	'./ciphers/symmetric/cast5.js',
+	'./ciphers/symmetric/des.js'
 ];
 
 // By requiring all of the files, they will in turn register themselves

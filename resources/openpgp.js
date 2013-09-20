@@ -13523,6 +13523,11 @@ return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requi
 	 		},
 	 		Cast5 : {
 	 			encrypt : cast5_encrypt
+	 		},
+	 		DES : {
+	 			createKeys : des_createKeys,
+	 			desede : desede,
+	 			des : des
 	 		}
 	 	}
 	 };

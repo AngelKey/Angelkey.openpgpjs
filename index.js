@@ -13521,6 +13521,11 @@
 	 		},
 	 		Cast5 : {
 	 			encrypt : cast5_encrypt
+	 		},
+	 		DES : {
+	 			createKeys : des_createKeys,
+	 			desede : desede,
+	 			des : des
 	 		}
 	 	}
 	 };
