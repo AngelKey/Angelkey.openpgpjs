@@ -13571,4 +13571,9 @@
 	 };
 	 exports.util = util;
 	 exports.compat = compat;
+	 exports.bigint = {
+	 	BigInteger : BigInteger,
+	 	nbi : nbi,
+	 	nbv : nbv
+	 };
 })(this);

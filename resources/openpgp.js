@@ -13573,6 +13573,11 @@ return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requi
 	 };
 	 exports.util = util;
 	 exports.compat = compat;
+	 exports.bigint = {
+	 	BigInteger : BigInteger,
+	 	nbi : nbi,
+	 	nbv : nbv
+	 };
 })(this);
 
 },{}]},{},[1])

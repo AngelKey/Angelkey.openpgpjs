@@ -58,4 +58,8 @@ exports.hash = {
 };
 exports.util = util;
 exports.compat = compat;
-exports.BigInteger = BigInteger;
+exports.bigint = {
+	BigInteger : BigInteger,
+	nbi : nbi,
+	nbv : nbv
+};
