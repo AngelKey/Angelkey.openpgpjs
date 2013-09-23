@@ -61,5 +61,7 @@ exports.compat = compat;
 exports.bigint = {
 	BigInteger : BigInteger,
 	nbi : nbi,
-	nbv : nbv
+	nbv : nbv,
+	Montgomery : Montgomery,
+	Classic : Classic
 };
