@@ -13525,6 +13525,11 @@
 	 		Twofish : {
 	 			encrypt : TFencrypt
 	 		}
+	 	},
+	 	asymmetric : {
+	 		RSA : RSA,
+	 		DSA : DSA,
+	 		Elgamal : Elgamal
 	 	}
 	 };
 	 exports.crypto = {
@@ -13535,10 +13540,14 @@
 	 	verifySignature  : openpgp_crypto_verifySignature,
 	 	signData : openpgp_crypto_signData,
 	 	getPrefixRandom : openpgp_crypto_getPrefixRandom,
-	 	generateSessionKey : openpgp_crypto_generateSessionKey
+	 	generateSessionKey : openpgp_crypto_generateSessionKey,
+	 	testRSA : openpgp_crypto_testRSA
+	 };
+	 exports.packet = {
+	 	KeyMaterial : openpgp_packet_keymaterial
 	 };
 	 exports.type = {
-	 	mpi : openpgp_type_mpi
+	 	MPI : openpgp_type_mpi
 	 };
 	 exports.encoding = {
 	 	eme_pkcs1_decode : openpgp_encoding_eme_pkcs1_decode,
