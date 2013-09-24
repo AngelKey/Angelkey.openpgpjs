@@ -39,14 +39,20 @@ exports.crypto = {
 	testRSA : openpgp_crypto_testRSA
 };
 exports.packet = {
-	KeyMaterial : openpgp_packet_keymaterial
+	KeyMaterial : openpgp_packet_keymaterial,
+	UserID : openpgp_packet_userid,
+	Signature : openpgp_packet_signature
+};
+exports.msg = {
+	PrivateKey : openpgp_msg_privatekey
 };
 exports.type = {
 	MPI : openpgp_type_mpi
 };
 exports.encoding = {
 	eme_pkcs1_decode : openpgp_encoding_eme_pkcs1_decode,
-	eme_pkcs1_encode : openpgp_encoding_eme_pkcs1_encode
+	eme_pkcs1_encode : openpgp_encoding_eme_pkcs1_encode,
+	armor : openpgp_encoding_armor
 };
 exports.keyring = openpgp_keyring;
 exports.hash = {
