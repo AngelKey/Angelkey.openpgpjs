@@ -20,6 +20,11 @@ exports.ciphers = {
 		Twofish : {
 			encrypt : TFencrypt
 		}
+	},
+	asymmetric : {
+		RSA : RSA,
+		DSA : DSA,
+		Elgamal : Elgamal
 	}
 };
 exports.crypto = {
