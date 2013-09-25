@@ -13583,6 +13583,7 @@
 	 	nbi : nbi,
 	 	nbv : nbv,
 	 	Montgomery : Montgomery,
-	 	Classic : Classic
+	 	Classic : Classic,
+	 	nbits : nbits
 	 };
 })(this);

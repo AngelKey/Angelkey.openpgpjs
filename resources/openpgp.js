@@ -13585,7 +13585,8 @@ return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requi
 	 	nbi : nbi,
 	 	nbv : nbv,
 	 	Montgomery : Montgomery,
-	 	Classic : Classic
+	 	Classic : Classic,
+	 	nbits : nbits
 	 };
 })(this);
 
