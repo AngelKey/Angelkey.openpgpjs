@@ -7877,7 +7877,6 @@ return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requi
 	   return crc & 0xffffff;
 	 }
 	 
-	 console.log(createcrc24("abcdf\x00\x01\x02abcdefghi"));
 	 // GPG4Browsers - An OpenPGP implementation in javascript
 	 // Copyright (C) 2011 Recurity Labs GmbH
 	 // 
