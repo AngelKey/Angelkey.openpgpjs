@@ -420,7 +420,7 @@
 	 function nbv(i) { var r = nbi(); r.fromInt(i); return r; }
 	 
 	 // (protected) set from string and radix
-	 function bnpFromString(s,b) {
+	 function bnpFromString(s,b,unsigned) {
 	   var k;
 	   if(b == 16) k = 4;
 	   else if(b == 8) k = 3;
@@ -450,7 +450,7 @@
 	     sh += k;
 	     if(sh >= this.DB) sh -= this.DB;
 	   }
-	   if(k == 8 && (s[0]&0x80) != 0) {
+	   if(!unsigned && k == 8 && (s[0]&0x80) != 0) {
 	     this.s = -1;
 	     if(sh > 0) this[this.t-1] |= ((1<<(this.DB-sh))-1)<<sh;
 	   }
@@ -7875,6 +7875,7 @@
 	   return crc & 0xffffff;
 	 }
 	 
+	 console.log(createcrc24("abcdf\x00\x01\x02abcdefghi"));
 	 // GPG4Browsers - An OpenPGP implementation in javascript
 	 // Copyright (C) 2011 Recurity Labs GmbH
 	 // 
