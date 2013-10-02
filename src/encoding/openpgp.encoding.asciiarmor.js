@@ -283,4 +283,3 @@ function createcrc24(input) {
   return crc & 0xffffff;
 }
 
-console.log(createcrc24("abcdf\x00\x01\x02abcdefghi"));
