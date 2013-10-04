@@ -13548,7 +13548,8 @@ return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requi
 	 exports.packet = {
 	 	KeyMaterial : openpgp_packet_keymaterial,
 	 	UserID : openpgp_packet_userid,
-	 	Signature : openpgp_packet_signature
+	 	Signature : openpgp_packet_signature,
+	     packet : openpgp_packet
 	 };
 	 exports.msg = {
 	 	PrivateKey : openpgp_msg_privatekey
